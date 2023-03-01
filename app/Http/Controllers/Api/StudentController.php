@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class StudentController extends Controller
 {
@@ -12,7 +13,11 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+        return response()->json([
+            'data' => $students
+        ]);
+        
     }
 
     /**
@@ -28,7 +33,11 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request-> all();
+        $students = Student::create($data);
+        return response()->json([
+            'data' => $students
+        ]);
     }
 
     /**
@@ -52,7 +61,13 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+        $student = Student::find($id);
+        $student->update($data);
+        return response()->json([
+            'status' => 'success',
+            'data' => $student
+        ]);
     }
 
     /**

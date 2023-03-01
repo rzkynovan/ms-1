@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\StudentController as AdminStudent;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/students', [AdminStudent::class, 'index'])->name('student');
+Route::post('/students-store', [AdminStudent::class, 'store'])->name('student.store');
+Route::put('/students/{id}', [AdminStudent::class, 'update'])->name('student.update');
